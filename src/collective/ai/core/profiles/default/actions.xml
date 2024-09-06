@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<object name="portal_actions" meta_type="Plone Actions Tool"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+  <object name="ai_controlpanel_tabs" meta_type="CMF Action Category">
+    <property name="title" i18n:translate="">AI control panel tabs</property>
+    <object name="collective.ai.core" meta_type="CMF Action">
+      <property name="title" i18n:translate="">Main</property>
+      <property name="url_expr">string:${portal_url}/@@collective-ai-settings</property>
+      <property name="icon_expr">string:bi bi-cpu</property>
+    </object>
+  </object>
+</object>
