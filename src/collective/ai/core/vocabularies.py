@@ -10,17 +10,8 @@ class ServicesVocabulary(object):
     """Vocabulary factory for http protocols"""
 
     def __call__(self, context):
-
-        get_registry_record("api_services")
         return SimpleVocabulary(
             [
-                SimpleTerm("default", "Default"),
-                SimpleTerm("gray", "Gray"),
-                SimpleTerm("ckeditor5", "CKEditor 5"),
-                SimpleTerm("dark", "Dark"),
-                SimpleTerm("custom", "Custom"),
             ]
         )
 
-
-WebspellcheckerThemesVocabularyFactory = WebspellcheckerThemesVocabulary()
