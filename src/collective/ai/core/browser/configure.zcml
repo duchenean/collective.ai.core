@@ -25,4 +25,18 @@
     permission="cmf.ManagePortal"
     layer="collective.ai.core.interfaces.ICollectiveAiCoreLayer"
   />
+
+  <browser:menu
+    id="collective-ai-actions"
+    title="The 'actions' menu - allows the user to execute actions on an object"
+    class=".menu.AiActionsMenu"
+    />
+
+  <adapter
+    factory=".menu.AiActionsSubMenuItem"
+    provides="plone.app.contentmenu.interfaces.IContentMenuItem"
+    for="*
+         *"
+    name="plone.contentmenu.ai.actions"
+    />
 </configure>

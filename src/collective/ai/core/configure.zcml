@@ -1,11 +1,11 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    xmlns:i18n="http://namespaces.zope.org/i18n"
-    xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="collective.ai.core">
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+  xmlns:i18n="http://namespaces.zope.org/i18n"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  i18n_domain="collective.ai.core">
 
-  <i18n:registerTranslations directory="locales" />
+  <i18n:registerTranslations directory="locales"/>
 
   <!--
     Be careful if you use general includeDependencies, it can have side effects!
@@ -14,32 +14,63 @@
   <!--<includeDependencies package="." />-->
 
   <!-- has to be loaded before permissions are used, so keep above views aso. -->
-  <include file="permissions.zcml" />
+  <include file="permissions.zcml"/>
 
-  <include package=".browser" />
+  <include package=".browser"/>
 
-  <genericsetup:registerProfile
-      name="default"
-      title="collective.ai.core"
-      directory="profiles/default"
-      description="Installs the collective.ai.core add-on."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.post_install"
-      />
-
-  <genericsetup:registerProfile
-      name="uninstall"
-      title="collective.ai.core (uninstall)"
-      directory="profiles/uninstall"
-      description="Uninstalls the collective.ai.core add-on."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      post_handler=".setuphandlers.uninstall"
-      />
 
   <utility
-      factory=".setuphandlers.HiddenProfiles"
-      name="collective.ai.core-hiddenprofiles"
-      />
+    name="collective.ai.core.vocabularies.ServiceTypesVocabulary"
+    factory=".vocabularies.ServiceTypesVocabulary"
+  />
+
+  <utility
+    name="collective.ai.core.vocabularies.ActiveTextCompletionServicesVocabulary"
+    factory=".vocabularies.ActiveTextCompletionServicesVocabulary"
+  />
+
+  <utility
+    name="collective.ai.core.vocabularies.TextCompletionServicesVocabulary"
+    factory=".vocabularies.TextCompletionServicesVocabulary"
+  />
+
+  <utility
+    name="collective.ai.core.vocabularies.TextCompletionModelsVocabulary"
+    factory=".vocabularies.TextCompletionModelsVocabulary"
+  />
+
+  <genericsetup:registerProfile
+    name="default"
+    title="collective.ai.core"
+    directory="profiles/default"
+    description="Installs the collective.ai.core add-on."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    post_handler=".setuphandlers.post_install"
+  />
+
+  <genericsetup:registerProfile
+    name="uninstall"
+    title="collective.ai.core (uninstall)"
+    directory="profiles/uninstall"
+    description="Uninstalls the collective.ai.core add-on."
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    post_handler=".setuphandlers.uninstall"
+  />
+
+  <utility
+    factory=".setuphandlers.HiddenProfiles"
+    name="collective.ai.core-hiddenprofiles"
+  />
+
+  <adapter
+    factory=".services.OpenAIService"
+  />
+
+  <adapter
+    factory=".services.MistralAIService"
+    provides=".services.IAiAPIService"
+    name="mistral-ai-service"
+  />
 
   <!-- -*- extra stuff goes here -*- -->
 

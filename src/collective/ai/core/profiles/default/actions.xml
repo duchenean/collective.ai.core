@@ -6,7 +6,10 @@
     <object name="collective.ai.core" meta_type="CMF Action">
       <property name="title" i18n:translate="">Main</property>
       <property name="url_expr">string:${portal_url}/@@collective-ai-settings</property>
-      <property name="icon_expr">string:bi bi-cpu</property>
+      <property name="icon_expr">string:bi bi-text-paragraph</property>
     </object>
   </object>
+  <object name="ai_actions" meta_type="CMF Action Category">
+  <property name="title" i18n:translate="">AI Actions</property>
+</object>
 </object>

@@ -11,19 +11,19 @@ from plone.autoform import directives
 from plone.schema import JSONField
 from plone.z3cform import layout
 from zope import schema
-from zope.interface import Interface
+from zope.component import queryAdapter
+from zope.interface import Interface, implementer
+from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
-CONNECTORS = SimpleVocabulary([
-    SimpleTerm(value='openai', title='OpenAI'),
-    SimpleTerm(value='gpt', title='GPT'),
-    SimpleTerm(value='custom', title='Custom'),
-])
-
 class IAiTextCompletionService(Interface):
-    connector = schema.Choice(
-        title=_("Connector"),
-        vocabulary=CONNECTORS,
+    label = schema.TextLine(
+        title=_("Label"),
+        required=True,
+    )
+    service_type = schema.Choice(
+        title=_("Service type"),
+        vocabulary="collective.ai.core.vocabularies.ServiceTypesVocabulary",
         required=True,
     )
     api_service_url = schema.URI(
@@ -49,7 +49,7 @@ class IAiTextCompletionService(Interface):
 class IAiCoreSettings(Interface):
     directives.widget('ai_text_completion_services',
                       BlockDataGridFieldFactory,
-                      allow_reorder=True,
+                      allow_reorder=False,
                       auto_append=False)
     ai_text_completion_services = schema.List(
         title=_("AI text completion services"),
