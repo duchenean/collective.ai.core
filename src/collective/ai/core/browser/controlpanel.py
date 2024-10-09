@@ -16,7 +16,7 @@ from zope.interface import Interface, implementer
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
-class IAiTextCompletionService(Interface):
+class IAITextCompletionService(Interface):
     label = schema.TextLine(
         title=_("Label"),
         required=True,
@@ -46,7 +46,7 @@ class IAiTextCompletionService(Interface):
     )
 
 
-class IAiCoreSettings(Interface):
+class IAICoreSettings(Interface):
     directives.widget('ai_text_completion_services',
                       BlockDataGridFieldFactory,
                       allow_reorder=False,
@@ -55,16 +55,16 @@ class IAiCoreSettings(Interface):
         title=_("AI text completion services"),
         value_type=DictRow(
             title=_("AI text completion service"),
-            schema=IAiTextCompletionService,
+            schema=IAITextCompletionService,
         ),
         required=False,
     )
 
-class AiCoreControlPanelForm(RegistryEditForm):
+class AICoreControlPanelForm(RegistryEditForm):
     label = _("Main AI settings")
-    schema = IAiCoreSettings
+    schema = IAICoreSettings
 
-class AiControlPanelFormWrapper(ControlPanelFormWrapper):
+class AICoreControlPanelFormWrapper(ControlPanelFormWrapper):
     index = ViewPageTemplateFile("controlpanel_layout.pt")
 
     def __init__(self, context, request):
@@ -83,4 +83,4 @@ class AiControlPanelFormWrapper(ControlPanelFormWrapper):
     def get_active_tab(self):
         return next(filter(lambda x: x['url'].split('/')[-1] == self.request.getURL().split('/')[-1], self.tabs))
 
-AiCoreControlPanelView = layout.wrap_form(AiCoreControlPanelForm, AiControlPanelFormWrapper)
+AiCoreControlPanelView = layout.wrap_form(AICoreControlPanelForm, AICoreControlPanelFormWrapper)

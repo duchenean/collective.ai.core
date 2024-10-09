@@ -64,12 +64,20 @@
 
   <adapter
     factory=".services.OpenAIService"
+    provides=".services.IAIAPIService"
+    name="open-ai-service"
   />
 
   <adapter
     factory=".services.MistralAIService"
-    provides=".services.IAiAPIService"
+    provides=".services.IAIAPIService"
     name="mistral-ai-service"
+  />
+
+  <adapter
+    factory=".services.OpenRouterAIService"
+    provides=".services.IAIAPIService"
+    name="openrouter-ai-service"
   />
 
   <!-- -*- extra stuff goes here -*- -->

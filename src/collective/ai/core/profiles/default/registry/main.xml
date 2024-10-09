@@ -3,5 +3,5 @@
   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
   i18n:domain="collective.ai.core">
 
-  <records interface="collective.ai.core.browser.controlpanel.IAiCoreSettings"/>
+  <records interface="collective.ai.core.browser.controlpanel.IAICoreSettings"/>
 </registry>
